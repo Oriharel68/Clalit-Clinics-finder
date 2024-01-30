@@ -33,8 +33,13 @@ mongoose                                  //mongosose connetion
 
 
   app.get('/getClinics',async (req,res)=>{
-    const query = await clinicsModel.find();
-    res.status(200).json(query);
+    try {
+      const query = await clinicsModel.find();
+      res.status(200).json(query);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+    
     
   });
 
