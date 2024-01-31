@@ -102,7 +102,7 @@ const SearchClinics: React.FC = () => {
             <div className="info-container">
               <p className="text-lg font-semibold">{selectedClinic.ClinicName}</p>
               <p>{selectedClinic.Area}</p>
-              <p>{selectedClinic.ClinicCode}</p>
+              <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'><a href={selectedClinic.Waze}>Waze It</a></button>
             </div>
           </div>
           {/* Add other clinic information as needed */}
