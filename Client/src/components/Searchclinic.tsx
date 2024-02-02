@@ -44,7 +44,7 @@ const SearchClinics: React.FC = () => {
     );
 
     // Return only the top 4 results
-    return filteredClinics.slice(0, 4);
+    return filteredClinics.slice(0, 5);
   };
 
   // Click handler to select a clinic and show additional info
