@@ -42,6 +42,8 @@ mongoose                                  //mongosose connetion
     
     
   });
+  
+
   app.get('/*',(req,res)=>{
     res.status(200).send('SERVER IS UP');
   })

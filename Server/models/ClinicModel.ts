@@ -4,7 +4,7 @@ export interface Clinic{
     ClinicName:String,
     Area:String,
     Waze:String,
-    WaseSite:String,
+    WazeSite:String,
     ClinicCode:String,
 }
 
@@ -12,7 +12,7 @@ const clinicsSchema = new mongooseClient.Schema<Clinic>({
     ClinicName:String,
     Area:String,
     Waze:String,
-    WaseSite:String,
+    WazeSite:String,
     ClinicCode:String,
   });
   
