@@ -30,7 +30,6 @@ const SearchClinics: React.FC = () => {
   const fetchClinics = async (): Promise<void> => {
     try {
       const { data } = await axios.get(`${ApiURL}/getClinics`);
-
       setClinics(data as any);
     } catch (error) {
       console.error("Error fetching clinics:", error);

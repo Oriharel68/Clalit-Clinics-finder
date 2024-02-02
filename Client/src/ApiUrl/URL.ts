@@ -1,5 +1,5 @@
 
 
-const ApiURL =  "http://10.0.0.23:4000";
+const ApiURL =  "https://clalit-clinics-finder.vercel.app";
 
 export default ApiURL;
