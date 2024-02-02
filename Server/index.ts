@@ -42,6 +42,9 @@ mongoose                                  //mongosose connetion
     
     
   });
+  app.get('/*',(req,res)=>{
+    res.status(200).send('SERVER IS UP');
+  })
 
 app.listen(Port,()=>{
     console.log(`server running on port ${Port}`);
