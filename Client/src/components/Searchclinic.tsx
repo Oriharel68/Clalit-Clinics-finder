@@ -5,6 +5,7 @@ import blob from "../assets/blob.png";
 import Clalit from "../assets/Clalit.png";
 import { FaWaze } from "react-icons/fa";
 import { IoReturnUpBackOutline } from "react-icons/io5";
+import { MagnifyingGlass } from "react-loader-spinner";
 
 interface Clinic {
   ClinicName: string;
@@ -70,14 +71,31 @@ const SearchClinics: React.FC = () => {
         <div>
           {!selectedClinic && (
             <div className="pt-24 relative">
-              <input
-                type="text"
-                dir="rtl"
-                placeholder="חיפוש מרפאות..."
-                className="w-full px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring focus:border-blue-300 text-lg rtl pl-10 pr-6"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              {clinics.length !== 0 ? (
+                <input
+                  type="text"
+                  dir="rtl"
+                  placeholder="חיפוש מרפאות..."
+                  className="w-full px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring focus:border-blue-300 text-lg rtl pl-10 pr-6"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              ) : (
+                <div className="w-full flex-col flex justify-center items-center">
+                  <MagnifyingGlass
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="magnifying-glass-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="magnifying-glass-wrapper"
+                    glassColor="#c0efff"
+                    color="#e15b64"
+                  />
+                  <h1 className="pt-0 text-2xl font-semibold text-gray-900">מחפש מרפאות</h1>
+                </div>
+              )}
+
               {searchTerm && (
                 <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded z-10 rtl">
                   {filterClinics().length === 0 ? (
@@ -109,9 +127,7 @@ const SearchClinics: React.FC = () => {
             <div className="close-Button-container"></div>
             <div className="info-container flex-col flex items-center justify-center">
               <div className="text-container pb-3">
-                <p className="text-xl font-bold">
-                  {selectedClinic.ClinicName}
-                </p>
+                <p className="text-xl font-bold">{selectedClinic.ClinicName}</p>
               </div>
               <div className="buttons-container flex justify-between w-full">
                 <div className="left-side-button-container">
