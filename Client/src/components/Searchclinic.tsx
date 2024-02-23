@@ -7,7 +7,7 @@ import { FaWaze } from "react-icons/fa";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import { MagnifyingGlass } from "react-loader-spinner";
 
-interface Clinic {
+export interface Clinic {
   ClinicName: string;
   Area: string;
   Waze: string;
