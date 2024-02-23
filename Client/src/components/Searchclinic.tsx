@@ -60,8 +60,8 @@ const SearchClinics: React.FC = () => {
   };
 
   return (
-    <div className="container h-screen flex flex-col items-center justify-around text-right box-border">
-      <div className="w-full flex justify-center flex-col items-center p-5 lg:pt-20">
+    <div className="container h-screen flex flex-col items-center justify-between text-right box-border">
+      <div className="w-full flex justify-center flex-col items-center p-5 pt-14 lg:pt-20">
         <div className="flex justify-center items-center flex-col">
           <img className="w-56" src={Clalit} alt="" />
           <div className="flex items-center justify-center font-bold text-lg">
@@ -70,7 +70,7 @@ const SearchClinics: React.FC = () => {
         </div>
         <div>
           {!selectedClinic && (
-            <div className="pt-24 relative">
+            <div className="pt-10 relative">
               {clinics.length !== 0 ? (
                 <input
                   type="text"
