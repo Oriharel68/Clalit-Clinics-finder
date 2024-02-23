@@ -50,24 +50,27 @@ mongoose                                  //mongosose connetion
 
   app.post('/register',async (req:Request,res:Response)=>{
     try {
-      const {UserName} = req.body;
-    const Secret = generateSecret({name:`${UserName}`,length:20,issuer:'Clalit Darom'});
+    const {UserName} = req.body;
+    if(!UserName)return res.status(400).send('missing info');
+    const Secret = speakeasy.generateSecret({name:`Clinic-finder:${UserName}`,length:20,issuer:'Clalit Darom'});
     const userDB = new UsersModel<User>({secret:Secret.hex,UserName})
     await userDB.save();
     qrcode.toDataURL(Secret.otpauth_url,(err,imgUrl)=>{
       if(err)return res.status(500).send("Failed to generate QrCode")
-      return res.status(200).json({imgUrl});
+      return res.status(200).send(`<img src=${imgUrl}>`);
     })
     } catch (error) {
-      return res.status(500).send("failed");
+      return res.status(500).send(error);
     }
 
   })
 
-  app.post('/verify',async (req:Request,res:Response)=>{
+  app.post('/login',async (req:Request,res:Response)=>{
     try {
-      const {UserName,token} = req.body;
-    const {secret} = await UsersModel.findOne({UserName:UserName});
+    const {UserName,token} = req.body;
+    const User = await UsersModel.findOne({UserName:UserName});
+    if(!User)return res.status(401).send('login failed');
+    const {secret} = User;
     const Validate = totp.verify({secret,encoding:'hex',token});
     if(Validate)return res.status(200).send('validation complete');
     return res.status(401).send('incorret code');
