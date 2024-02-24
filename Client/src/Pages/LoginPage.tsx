@@ -2,18 +2,20 @@ import axios from "axios";
 import Clalit from "../assets/Clalit.png";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Apiurl from "../ApiUrl/URL";
+import { useNavigate } from "react-router-dom";
 
 type input = {
   userName: string;
   token: string;
 };
 function LoginPage() {
+  const navigator = useNavigate();
   const { register, handleSubmit,formState:{errors} } = useForm<input>();
   const onSubmit: SubmitHandler<input> = async (data) => {
     try {
       const response = await axios.post(`${Apiurl}/login`, data);
       if (response.status !== 200) return alert("ההתחברות נכשלה");
-      alert("התחברות הצליחה");
+      navigator('/adminPanel');
     } catch (error:any) {
       alert(error.message);
     }

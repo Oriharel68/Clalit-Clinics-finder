@@ -6,6 +6,7 @@ import Url from '../ApiUrl/URL'
 
 function AdminPage() {
     const [Clinics, setClinics] = useState<Clinic[]>([]);
+    const [Refreash, setRefreash] = useState<boolean>(false);
 
     useEffect(()=>{
         async function GetClinics(){
@@ -17,13 +18,17 @@ function AdminPage() {
             }
         }
         GetClinics();
-    },[])
+    },[Refreash]);
 
   return (
-<div className="relative overflow-x-auto">
+    <>
+    <div className="relative overflow-x-auto">
     <table className="w-full text-sm text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr> 
+            <th scope="col" className="px-6 py-3" >מחיקה</th>
+            <th scope="col" className="px-6 py-3" >עריכה</th>
+                
                 <th scope="col" className="px-6 py-3">
                     Waze
                 </th>
@@ -41,12 +46,14 @@ function AdminPage() {
         <tbody>
             {Clinics.map((item)=>{
                 return (
-                <Clinicitem Clinic={item} />)
+                <Clinicitem key={item._id} setRefreash={setRefreash} Clinic={item} />)
             })}
          
         </tbody>
     </table>
 </div>
+    </>
+
 
   )
 }

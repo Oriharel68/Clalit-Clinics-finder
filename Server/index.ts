@@ -2,7 +2,7 @@ import { Express ,Request,Response } from "express";
 import { Model } from "mongoose";
 import {Clinic} from "./models/ClinicModel"
 import {User} from './models/UsersModel'
-import {generateSecret,totp} from 'speakeasy'
+import {totp} from 'speakeasy'
 
 
 const express = require('express');
@@ -48,6 +48,21 @@ mongoose                                  //mongosose connetion
     
   });
 
+
+  
+  app.delete('/deleteClinic',async (req,res)=>{
+    try {
+      const {_id} = req.query;
+      const query = await clinicsModel.findByIdAndDelete(_id);
+      if(!query) return res.status(404).send('didnt find the clinic');
+      return res.status(200).send('clinic was succsefuly removed');
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+    
+    
+  });
+
   app.post('/register',async (req:Request,res:Response)=>{
     try {
     const {UserName} = req.body;
@@ -67,8 +82,8 @@ mongoose                                  //mongosose connetion
 
   app.post('/login',async (req:Request,res:Response)=>{
     try {
-    const {UserName,token} = req.body;
-    const User = await UsersModel.findOne({UserName:UserName});
+    const {userName,token} = req.body;
+    const User = await UsersModel.findOne({UserName:userName});
     if(!User)return res.status(401).send('login failed');
     const {secret} = User;
     const Validate = totp.verify({secret,encoding:'hex',token});
