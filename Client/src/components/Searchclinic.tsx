@@ -6,6 +6,7 @@ import Clalit from "../assets/Clalit.png";
 import { FaWaze } from "react-icons/fa";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import { MagnifyingGlass } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 export interface Clinic {
   ClinicName: string;
@@ -20,6 +21,7 @@ export interface Clinic {
 const SearchClinics: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [clinics, setClinics] = useState<Clinic[]>([]);
+  const navigate = useNavigate();
   const [selectedClinic, setSelectedClinic] = useState<Clinic | null>(null);
 
   useEffect(() => {
@@ -58,12 +60,16 @@ const SearchClinics: React.FC = () => {
   const handleCloseInfo = (): void => {
     setSelectedClinic(null);
   };
+  const handleAdmin = ()=>{
+    
+    navigate('/login');
+  }
 
   return (
     <div className="container h-screen flex flex-col items-center justify-between text-right box-border">
       <div className="w-full flex justify-center flex-col items-center p-5 pt-14 lg:pt-20">
         <div className="flex justify-center items-center flex-col">
-          <img className="w-56" src={Clalit} alt="" />
+          <img onClick={handleAdmin} className="w-56" src={Clalit} alt="" />
           <div className="flex items-center justify-center font-bold text-lg">
             <h2>חיפוש וניווט מרפאות מחוז דרום</h2>
           </div>
